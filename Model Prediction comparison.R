@@ -8,7 +8,7 @@ library(corrplot)
 library(randomForest)
 library(rattle)
 set.seed(123)
-#Data has empty columns, NA and #DIV/0, I removed them from the data
+#Load the raw data
 train_dat<- read.csv("pml-training.csv")[,-1]
 test_dat<- read.csv("pml-testing.csv")[,-1]
 dim(train_dat)
@@ -26,7 +26,7 @@ testing <- testing[,-c(1:5)]
 dim(training)
 dim(testing)
 #variable is reduced to 53
-#Preparation of training and testing dataset before training the models
+#Preparation of training and testing dataset before testing the models
 inTraining<- createDataPartition(y=training$classe, p=0.7, list=FALSE)
 train_final<- training[inTraining, ]
 test_final<- training[-inTraining, ]

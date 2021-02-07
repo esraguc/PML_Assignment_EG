@@ -2,7 +2,9 @@
 title: "Assignment Description"
 author: "Esra Guc"
 date: "07/02/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
  First I loaded libraries that I will need for this assignment
  
@@ -18,14 +20,15 @@ library(rattle)
 ```
 Then I set the seed and installed the data from my computer
 ```{r}
+setwd("/Users/eguc/Desktop")
 set.seed(123)
 train_dat<- read.csv("pml-training.csv")[,-1]
 test_dat<- read.csv("pml-testing.csv")[,-1]
 dim(train_dat)
 dim(test_dat)
 ```
-There are 159 variable in this data set however some variables have a lot of NA, some has almost 0 variation 
-also first 5 variables wont be used in training so these are removed
+There are 159 variables in this data set however some variables have a lot of NA, some has almost 0 variation 
+also first 5 variables wont be used in training so I removed these
 ```{r}
 Zerovar<- nearZeroVar(train_dat)
 training<- train_dat[,-Zerovar]
@@ -43,9 +46,15 @@ dim(testing)
 ```
 variable numbers are decreased to 53
 
-There are few variables that are highly correlated (negative correlations is dark red(-1) and positive correlation is dark blue(1)) therefore PCA analysis is not necessary. 
+I checked the correlation of variables in training dataset using FPC
+```{r}
+corMatrix <- cor(training[, -53])
+corrplot(corMatrix, order = "FPC", method = "color", type = "lower", 
+         tl.cex = 0.8, tl.col = rgb(0, 0, 0))
+```
+There are few variables that are highly correlated (negative correlations is dark red(-1) and positive correlation is dark blue(1)) therefore I havent checked the data using PCA plot. 
 
-Then I start preparing the training and testing data to test models. I will use Decision Tree  and Random Forest models. I created two partitions ( 70% and 30%) from training data. 
+Then I started preparing the training and testing data to test models. I will use Decision Tree  and Random Forest models. I created two partitions ( 70% and 30%) from training data. 
 ```{r}
 inTraining<- createDataPartition(y=training$classe, p=0.7, list=FALSE)
 train_final<- training[inTraining, ]

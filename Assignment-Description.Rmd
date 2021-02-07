@@ -43,6 +43,12 @@ dim(testing)
 ```
 variable numbers are decreased to 53
 
+I checked the correlation matrix between variables. I used first principal component order FPC. 
+```{r}
+corr_matrix<- cor(training[,-53])
+corrplot(corr_matrix, order="FPC", method="circle", type="lower", tl.cex=0.6, tl.col=rgb(0, 0, 0))
+```
+
 There are few variables that are highly correlated (negative correlations is dark red(-1) and positive correlation is dark blue(1)) therefore PCA analysis is not necessary. 
 
 Then I start preparing the training and testing data to test models. I will use Decision Tree  and Random Forest models. I created two partitions ( 70% and 30%) from training data. 

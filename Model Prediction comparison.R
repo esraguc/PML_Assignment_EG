@@ -37,6 +37,7 @@ ConfM_train_DT <- confusionMatrix(predict_train_DT,as.factor(train_final$classe)
 predict_test_DT <- predict(mod_DT, test_final)
 ConfM_test_DT <- confusionMatrix(predict_test_DT,as.factor(test_final$classe))
 print(ConfM_test_DT)
+print(summary(mod_DT))
 # Decisiont Tree modeling accuracy is 0.4997
 # Random Forest, data processing takes very long, I got this tip from Coursera Forum, data needs to be tuned using tuneGrid
 mod_RF <- train(classe ~ .,data=train_final, method = "rf", trControl=trainControl(method="none"), tuneGrid=data.frame(mtry=7))
@@ -45,6 +46,8 @@ ConfM_train_RF <- confusionMatrix(predict_train_RF,as.factor(train_final$classe)
 predict_test_RF <- predict(mod_RF, test_final)
 ConfM_test_RF <- confusionMatrix(predict_test_RF,as.factor(test_final$classe))
 print(ConfM_test_RF)
+print(summary(mod_RF))
+
 
 #When these two methods are compared Random Forest model predicts with higher accuracy overall 0.9944 .
 

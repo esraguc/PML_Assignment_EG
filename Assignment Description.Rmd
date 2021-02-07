@@ -46,13 +46,6 @@ dim(testing)
 ```
 variable numbers are decreased to 53
 
-I checked the correlation of variables in training dataset using FPC
-```{r}
-corMatrix <- cor(training[, -53])
-corrplot(corMatrix, order = "FPC", method = "color", type = "lower", 
-         tl.cex = 0.8, tl.col = rgb(0, 0, 0))
-```
-There are few variables that are highly correlated (negative correlations is dark red(-1) and positive correlation is dark blue(1)) therefore I havent checked the data using PCA plot. 
 
 Then I started preparing the training and testing data to test models. I will use Decision Tree  and Random Forest models. I created two partitions ( 70% and 30%) from training data. 
 ```{r}

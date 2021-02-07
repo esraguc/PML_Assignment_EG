@@ -26,10 +26,6 @@ testing <- testing[,-c(1:5)]
 dim(training)
 dim(testing)
 #variable is reduced to 53
-# I checked the correlation using FPC
-cor_Matrix <- cor(training[, -53])
-corrplot(cor_Matrix, order = "FPC", method = "color", type = "lower", 
-         tl.cex = 0.6, tl.col = rgb(0, 0, 0))
 
 #Preparation of training and testing dataset before testing the models
 inTraining<- createDataPartition(y=training$classe, p=0.7, list=FALSE)
